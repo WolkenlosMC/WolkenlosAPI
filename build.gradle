@@ -2,7 +2,7 @@
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.8.22"
-    id ("maven-publish")
+    id("maven-publish")
     id("org.jetbrains.dokka") version "1.8.20"
     id("io.papermc.paperweight.userdev") version "1.5.5"
 }
@@ -45,6 +45,14 @@ tasks {
 }
 publishing {
     repositories {
+        maven {
+            name = "OSSRH"
+            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
         maven {
             name = "GitHubPackages"
             url = "https://maven.pkg.github.com/wolkenlosmc/wolkenlosapi"
