@@ -60,10 +60,7 @@ publishing {
     repositories {
         maven("https://oss.sonatype.org/service/local/staging/deploy/maven2") {
             name = "ossrh"
-            credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_PASSWORD")
-            }
+            credentials (PasswordCredentials::class)
         }
     }
     publications {
