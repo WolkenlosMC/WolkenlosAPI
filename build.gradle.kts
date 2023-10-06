@@ -12,6 +12,7 @@ plugins {
 
     `maven-publish`
     `java-library`
+    signing
 
     id("org.jetbrains.dokka") version "1.8.20"
     id("io.papermc.paperweight.userdev") version "1.5.5"
@@ -34,6 +35,11 @@ tasks {
         dependsOn(reobfJar)
     }
 
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        options.release.set(17)
+    }
+
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
     }
@@ -42,6 +48,11 @@ tasks {
         outputDirectory.set(projectDir.resolve("docs"))
     }
 }
+
+signing {
+    sign(publishing.publications)
+}
+
 
 
 java {
