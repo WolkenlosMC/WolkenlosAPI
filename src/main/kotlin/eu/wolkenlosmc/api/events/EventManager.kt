@@ -1,7 +1,7 @@
 package eu.wolkenlosmc.api.events
 
 import eu.wolkenlosmc.api.extensions.pluginManager
-import eu.wolkenlosmc.testplugin.api.main.WolkenlosAPI.Companion.instance
+import eu.wolkenlosmc.api.main.WolkenlosAPI.Companion.instance
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
 import org.bukkit.event.HandlerList
