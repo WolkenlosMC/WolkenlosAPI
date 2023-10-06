@@ -34,11 +34,6 @@ tasks {
         dependsOn(reobfJar)
     }
 
-    withType<JavaCompile> {
-        options.encoding = "UTF-8"
-        options.release.set(17)
-    }
-
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
     }
