@@ -10,8 +10,9 @@ plugins {
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.serialization") version "1.8.22"
 
-    `maven-publish`
     `java-library`
+    `maven-publish`
+
 
     id("org.jetbrains.dokka") version "1.8.20"
     id("io.papermc.paperweight.userdev") version "1.5.5"
