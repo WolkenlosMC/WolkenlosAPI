@@ -65,13 +65,6 @@ publishing {
                 password = System.getenv("OSSRH_PASSWORD")
             }
         }
-        maven(url = "https://maven.pkg.github.com/wolkenlosmc/wolkenlosapi") {
-            name = "GitHubPackages"
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
     }
     publications {
         register<MavenPublication>(project.name) {
