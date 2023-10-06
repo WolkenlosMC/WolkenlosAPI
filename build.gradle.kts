@@ -92,7 +92,7 @@ publishing {
 
                 developers {
                     developer {
-                        name.set("jakobkmar")
+                        name.set("theskyscout")
                     }
                 }
 
