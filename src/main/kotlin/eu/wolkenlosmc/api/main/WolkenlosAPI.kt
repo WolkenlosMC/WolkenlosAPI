@@ -1,4 +1,4 @@
-package eu.wolkenlosmc.testplugin.api.main
+package eu.wolkenlosmc.api.main
 
 import org.bukkit.plugin.java.JavaPlugin
 
