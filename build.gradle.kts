@@ -12,7 +12,6 @@ plugins {
 
     `java-library`
     `maven-publish`
-    signing
 
     id("org.jetbrains.dokka") version "1.8.20"
     id("io.papermc.paperweight.userdev") version "1.5.5"
@@ -47,9 +46,6 @@ tasks {
     dokkaHtml.configure {
         outputDirectory.set(projectDir.resolve("docs"))
     }
-}
-signing {
-    sign(publishing.publications)
 }
 
 java {
