@@ -1,3 +1,6 @@
+#gradle.properties
+gradle.properties
+
 # Env files
 .env
 

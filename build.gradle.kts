@@ -12,6 +12,7 @@ plugins {
 
     `java-library`
     `maven-publish`
+    signing
 
     id("org.jetbrains.dokka") version "1.8.20"
     id("io.papermc.paperweight.userdev") version "1.5.5"
@@ -57,8 +58,8 @@ publishing {
     repositories {
         maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
             credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_PASSWORD")
+                username = findProperty("ossrhUsername")?.toString()
+                password = findProperty("ossrhPassword")?.toString()
             }
         }
     }
@@ -98,4 +99,7 @@ publishing {
             }
         }
     }
+}
+signing {
+    sign(publishing.publications)
 }
