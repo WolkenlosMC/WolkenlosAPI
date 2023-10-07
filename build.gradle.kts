@@ -56,7 +56,6 @@ java {
 publishing {
     repositories {
         maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-            name = "ossrh"
             credentials {
                 username = System.getenv("OSSRH_USERNAME")
                 password = System.getenv("OSSRH_PASSWORD")
@@ -66,7 +65,7 @@ publishing {
     publications {
         register<MavenPublication>(project.name) {
             from(components["java"])
-            //artifact(tasks.jar.get().outputs.files.single())
+            artifact(tasks.jar.get().outputs.files.single())
 
             this.groupId = project.group.toString()
             this.artifactId = project.name.lowercase()
