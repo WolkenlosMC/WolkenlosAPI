@@ -57,19 +57,10 @@ java {
 }
 
 publishing {
-    repositories {
-        maven("https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-            name = "ossrh"
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
-    }
     publications {
         register<MavenPublication>(project.name) {
             from(components["java"])
-            artifact(tasks.jar.get().outputs.files.single())
+            //artifact(tasks.jar.get().outputs.files.single())
 
             this.groupId = project.group.toString()
             this.artifactId = project.name.lowercase()
@@ -98,6 +89,15 @@ publishing {
                     connection.set("scm:git:git://github.com/${githubRepo}.git")
                     url.set("https://github.com/${githubRepo}/tree/main")
                 }
+            }
+        }
+    }
+    repositories {
+        maven("https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+            name = "ossrh"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
             }
         }
     }
