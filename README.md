@@ -1,4 +1,6 @@
 # WolkenlosAPI
+**Latest Version:** `1.0`
+
 WolkenlosAPI is a Kotlin libary for Minecaft(Spigot). It adds a lot of features for 
 building own plugins for Wolkenlos. 
 
