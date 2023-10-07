@@ -12,7 +12,7 @@ plugins {
 
     `java-library`
     `maven-publish`
-
+    signing
 
     id("org.jetbrains.dokka") version "1.8.20"
     id("io.papermc.paperweight.userdev") version "1.5.5"
@@ -48,8 +48,9 @@ tasks {
         outputDirectory.set(projectDir.resolve("docs"))
     }
 }
-
-
+signing {
+    sign(publishing.publications)
+}
 
 java {
     withSourcesJar()
@@ -57,6 +58,15 @@ java {
 }
 
 publishing {
+    repositories {
+        maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            name = "ossrh"
+            credentials {
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_PASSWORD")
+            }
+        }
+    }
     publications {
         register<MavenPublication>(project.name) {
             from(components["java"])
@@ -69,6 +79,7 @@ publishing {
             pom {
                 name.set(project.name)
                 description.set(project.description)
+                packaging = "jar"
 
                 developers {
                     developer {
@@ -89,15 +100,6 @@ publishing {
                     connection.set("scm:git:git://github.com/${githubRepo}.git")
                     url.set("https://github.com/${githubRepo}/tree/main")
                 }
-            }
-        }
-    }
-    repositories {
-        maven("https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-            name = "ossrh"
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
             }
         }
     }
