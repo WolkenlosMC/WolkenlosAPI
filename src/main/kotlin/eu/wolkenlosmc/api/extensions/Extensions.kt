@@ -8,4 +8,3 @@ val pluginManager get() = Bukkit.getPluginManager()
 
 val miMe get () = MiniMessage.miniMessage()
 
-val testList = ArrayList<Player>()
