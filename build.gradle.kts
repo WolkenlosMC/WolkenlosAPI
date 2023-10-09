@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val githubRepo = "wolkenlosmc/WolkenlosApi"
 
 group = "eu.wolkenlosmc"
-version = "1.1"
+version = "1.1.1"
 description = "This is an API for developing plugins for the WolkenlosMC network."
 
 plugins {
