@@ -108,6 +108,62 @@ class GUIPageBuilder(
     }
 
     /**
+     * Adds a line of items to the page
+     * @param startSlot The start slot of the line
+     * @param endSlot The end slot of the line
+     * @param itemStack The item stack of the items
+     * @param builder The builder for the items
+     * @throws IndexOutOfBoundsException If the start slot or the end slot is out of bounds
+     * @throws IllegalArgumentException If the start slot is greater than the end slot
+     * @since 1.1
+     * @author TheSkyScout
+     */
+    @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
+    fun line(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit) {
+        for (i in startSlot..endSlot) {
+            items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
+        }
+    }
+
+    /**
+     * Adds a vertical line of items to the page
+     * @param startSlot The start slot of the line
+     * @param endSlot The end slot of the line
+     * @param itemStack The item stack of the items
+     * @param builder The builder for the items
+     * @throws IndexOutOfBoundsException If the start slot or the end slot is out of bounds
+     * @throws IllegalArgumentException If the start slot is greater than the end slot
+     * @since 1.1
+     * @author TheSkyScout
+     */
+    @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
+    fun verticalLine(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit) {
+        for (i in startSlot..endSlot step 9) {
+            items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
+        }
+    }
+
+    /**
+     * Adds a square of items to the page
+     * @param startSlot The start slot of the line
+     * @param endSlot The end slot of the line
+     * @param itemStack The item stack of the items
+     * @param builder The builder for the items
+     * @throws IndexOutOfBoundsException If the start slot or the end slot is out of bounds
+     * @throws IllegalArgumentException If the start slot is greater than the end slot
+     * @since 1.1
+     * @author TheSkyScout
+     */
+    @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
+    fun square(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit) {
+        for (i in startSlot..endSlot step 9) {
+            for (j in i..i + 8) {
+                items[j] = GUIItemBuilder(j, itemStack).apply(builder).build()
+            }
+        }
+    }
+
+    /**
      * Sets the background of the page
      * @param itemStack The item stack of the background
      * @since 1.0

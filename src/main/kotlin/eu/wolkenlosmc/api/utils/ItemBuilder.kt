@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta
  * This class is used to create items
  * @param material The material of the item
  * @param amount The amount of the item
- * @since 1.0
+ * @since 1.1
  * @author TheSkyScout
  */
 class ItemBuilder(material: Material) {
