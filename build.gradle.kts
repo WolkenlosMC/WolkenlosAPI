@@ -4,7 +4,7 @@ val githubRepo = "wolkenlosmc/WolkenlosApi"
 
 group = "eu.wolkenlosmc"
 version = "1.0"
-description = "A API for Wolkenlos plugins"
+description = "This is an API for developing plugins for the WolkenlosMC network."
 
 plugins {
     kotlin("jvm") version "1.8.22"
