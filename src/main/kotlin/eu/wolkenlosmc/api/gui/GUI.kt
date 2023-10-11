@@ -77,7 +77,8 @@ class GUI(
     }
 
     /**
-     * This function is used to get the real ItemStack of a GUIItem, because the ItemStack of a GUIItem can be changed by conditions
+     * This function is used to get the real ItemStack of a GUIItem, because the ItemStack
+     * of a GUIItem can be changed by conditions
      * @param guiItem The GUIItem
      * @param player The player
      * @return The real ItemStack of the GUIItem
@@ -186,7 +187,6 @@ class GUI(
 
     /**
      * This function is used to open the GUI for a player at the default page
-     * @param player The player
      * @throws NullPointerException If the GUIInstance for the player is not found
      * @throws IndexOutOfBoundsException If the currentPageIndex is out of bounds
      * @throws IllegalStateException If the GUIInstance for the player is already open

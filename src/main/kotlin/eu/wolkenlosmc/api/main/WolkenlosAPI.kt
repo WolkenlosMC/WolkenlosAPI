@@ -11,5 +11,4 @@ class WolkenlosAPI(plugin: JavaPlugin) {
     init {
         instance = plugin
     }
-
 }
