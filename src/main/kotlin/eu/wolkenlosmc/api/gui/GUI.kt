@@ -57,15 +57,15 @@ class GUI(
      */
     init {
         listen<InventoryClickEvent> {
-            if (it.view.title() == data.title) {
-                val player = it.whoClicked as Player
-                val guiInstance = getInstance(player)
-                val guiItem = currentPage.items[it.slot]
-                if(it.clickedInventory != bukkitInventory) return@listen
-                if (guiItem != null ) guiItem.onClick?.invoke(GUIClickEvent(it, guiInstance, player))
-                it.isCancelled = true
-                guiInstance.refresh()
-            }
+            if (it.view.title() != data.title) return@listen
+            if(it.clickedInventory != bukkitInventory) return@listen
+            val player = it.whoClicked as Player
+            val guiInstance = getInstance(player)
+            val guiItem = currentPage.items[it.slot]
+            if (guiItem != null ) guiItem.onClick?.invoke(GUIClickEvent(it, guiInstance, player))
+            it.isCancelled = true
+            guiInstance.refresh()
+
         }
         listen<InventoryCloseEvent> {
             if (it.view.title() == data.title) {
@@ -137,7 +137,9 @@ class GUI(
      * @author TheSkyScout
      */
     fun createInstance(player: Player): GUIInstance {
-        return GUIInstance(this, player)
+        val guiInstance = GUIInstance(this, player)
+        instances[player] =  guiInstance
+        return guiInstance
     }
 
     /**
@@ -151,7 +153,8 @@ class GUI(
      * @author TheSkyScout
      */
     fun open(player: Player) {
-        createInstance(player).openPage(currentPageIndex)
+        val guiInstance = instances[player] ?: createInstance(player)
+        guiInstance.openPage(currentPageIndex)
     }
 
     /**
@@ -165,7 +168,8 @@ class GUI(
      * @author TheSkyScout
      */
     fun open(player: Player, pageIndex: Int) {
-        createInstance(player).openPage(pageIndex)
+        val guiInstance = instances[player] ?: createInstance(player)
+        guiInstance.openPage(pageIndex)
     }
 
     /**
@@ -207,9 +211,6 @@ class GUIInstance(
     val player: Player,
 ) {
 
-    init {
-        gui.instances[player] = this
-    }
 
     /**
      * This function is used to open the GUI for the player

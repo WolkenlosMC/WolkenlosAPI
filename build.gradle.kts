@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val githubRepo = "wolkenlosmc/WolkenlosApi"
 
 group = "eu.wolkenlosmc"
-version = "1.1.1"
+version = "1.1.2"
 description = "This is an API for developing plugins for the WolkenlosMC network."
 
 plugins {
@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")
     implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.10.1")
