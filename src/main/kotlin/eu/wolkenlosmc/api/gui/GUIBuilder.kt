@@ -49,7 +49,7 @@ class GUIBuilder(
     val type: GUIType,
     val title: Component,
 ) {
-    private val pagesMap = ArrayList<GUIPage>()
+    val pagesMap = ArrayList<GUIPage>()
 
     var defaultPage: Int = 0
 
@@ -64,7 +64,7 @@ class GUIBuilder(
      * @author TheSkyScout
      */
     fun page(index: Int, builder: GUIPageBuilder.() -> Unit) {
-        pagesMap.add(GUIPageBuilder(index).apply(builder).build())
+        pagesMap.add(GUIPageBuilder(index, this).apply(builder).build())
     }
 
     /**
@@ -90,6 +90,7 @@ class GUIBuilder(
  */
 class GUIPageBuilder(
     val index: Int,
+    val guiBuilder: GUIBuilder,
 ) {
 
     private val items = HashMap<Int, GUIItem>()
@@ -107,6 +108,10 @@ class GUIPageBuilder(
         items[slot] = GUIItemBuilder(slot, itemStack).apply(builder).build()
     }
 
+    fun item(slot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit)
+    = item(slot.slot, itemStack, builder)
+
+
     /**
      * Adds a line of items to the page
      * @param startSlot The start slot of the line
@@ -119,11 +124,15 @@ class GUIPageBuilder(
      * @author TheSkyScout
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
-    fun line(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit) {
+    fun row(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
         for (i in startSlot..endSlot) {
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
+
+    fun row(startSlot: Slot, endSlot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
+    = row(startSlot.slot, endSlot.slot, itemStack, builder)
+
 
     /**
      * Adds a vertical line of items to the page
@@ -137,11 +146,15 @@ class GUIPageBuilder(
      * @author TheSkyScout
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
-    fun verticalLine(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit) {
+    fun column(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
         for (i in startSlot..endSlot step 9) {
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
+
+    fun column(startSlot: Slot, endSlot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
+    = column(startSlot.slot, endSlot.slot, itemStack, builder)
+
 
     /**
      * Adds a square of items to the page
@@ -155,13 +168,53 @@ class GUIPageBuilder(
      * @author TheSkyScout
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
-    fun square(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit) {
+    fun square(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
         for (i in startSlot..endSlot step 9) {
             for (j in i..i + 8) {
                 items[j] = GUIItemBuilder(j, itemStack).apply(builder).build()
             }
         }
     }
+
+    fun square(startSlot: Slot, endSlot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
+    = square(startSlot.slot, endSlot.slot, itemStack, builder)
+
+    /**
+     * Adds a square of items to the page
+     * @param startSlot The start slot of the line
+     * @param width The width of the square
+     * @param height The height of the square
+     * @param itemStack The item stack of the items
+     * @param builder The builder for the items
+     * @throws IndexOutOfBoundsException If the start slot or the end slot is out of bounds
+     * @throws IllegalArgumentException If the start slot is greater than the end slot
+     * @since 1.1.2
+     * @author TheSkyScout
+     */
+    fun square(startSlot: Int, width:Int, height:Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
+        for (i in startSlot..startSlot + (width - 1) + (height - 1) * 9 step 9) {
+            for (j in i..i + (width - 1)) {
+                items[j] = GUIItemBuilder(j, itemStack).apply(builder).build()
+            }
+        }
+    }
+
+    fun square(startSlot: Slot, width:Int, height:Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
+    = square(startSlot.slot, width, height, itemStack, builder)
+
+    /**
+     * Copies the items and the background from another page
+     * @param page The page to copy from
+     * @since 1.1.2
+     * @author TheSkyScout
+     */
+    fun copyFromPage(page: GUIPage) {
+        items.putAll(page.items)
+        backgroundItemStack = page.backgroundItem
+    }
+
+    fun copyFromPage(page: Int) = copyFromPage(guiBuilder.pagesMap[page])
+
 
     /**
      * Sets the background of the page
