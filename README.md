@@ -23,7 +23,7 @@ And from now on you can use every function of the api, withoud any problems.
 ### GUI's
 This allows you to easily create clickable GUI's in Minecraft.
 ```kt
-val gui = gui(GUIType.TWENTY_SEVEN, format("Title")) {
+player.gui(GUIType.TWENTY_SEVEN, format("Title")) {
    page(0) {
       background(ItemStack(Material.REDSTONE))
       item(0, ItemStack(Material.STICK)) {
