@@ -5,9 +5,7 @@ import eu.wolkenlosmc.api.gui.elements.GUIItem
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.inventory.InventoryCloseEvent
-import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.inventory.*
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
@@ -58,7 +56,14 @@ class GUI(
     init {
         listen<InventoryClickEvent> {
             if (it.view.title() != data.title) return@listen
-            if(it.clickedInventory != bukkitInventory) return@listen
+            if(it.clickedInventory != bukkitInventory) {
+                if(it.view.topInventory == bukkitInventory
+                    && it.click == ClickType.SHIFT_LEFT || it.action == InventoryAction.MOVE_TO_OTHER_INVENTORY) {
+                    it.isCancelled = true
+                    return@listen
+                }
+                return@listen
+            }
             val player = it.whoClicked as Player
             val guiInstance = getInstance(player)
             val guiItem = currentPage.items[it.slot]
@@ -127,7 +132,7 @@ class GUI(
      */
     @Throws(NullPointerException::class)
     fun getInstance(player: Player): GUIInstance {
-        return instances[player] ?: error("GUIInstance for player ${player.name} not found")
+        return instances[player] ?: createInstance(player)
     }
 
     /**

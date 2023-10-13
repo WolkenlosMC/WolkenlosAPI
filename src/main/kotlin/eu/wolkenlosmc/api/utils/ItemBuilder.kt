@@ -17,7 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta
  * @author TheSkyScout
  */
 class ItemBuilder(material: Material) {
-    private val mm = MiniMessage.miniMessage()
     private var amount:Int = 1
     private var lore= ArrayList<Component>()
     private var itemStack:ItemStack
@@ -25,6 +24,7 @@ class ItemBuilder(material: Material) {
 
     constructor(material: Material, amount: Int): this(material) {
         this.amount = amount
+        this.itemStack.amount = amount
     }
     constructor(itemStack: ItemStack): this(itemStack.type) {
         this.itemStack = itemStack
