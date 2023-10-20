@@ -18,7 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta
  */
 class ItemBuilder(material: Material) {
     private var amount:Int = 1
-    private var lore= ArrayList<Component>()
+    private var lore = ArrayList<Component>()
     private var itemStack:ItemStack
     private var itemMeta:ItemMeta
 

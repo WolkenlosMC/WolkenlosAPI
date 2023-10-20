@@ -3,16 +3,19 @@ package eu.wolkenlosmc.api.gui.elements
 import eu.wolkenlosmc.api.gui.GUIData
 import eu.wolkenlosmc.api.gui.GUIType
 
-enum class Row(val startSlot: Int, val endSlot: Int) {
-    ONE(0, 8),
-    TWO(9, 17),
-    THREE(18, 26),
-    FOUR(27, 35),
-    FIVE(36, 44),
-    SIX(45, 53)
+enum class Row(val startSlot: Int) {
+    ONE(0),
+    TWO(9),
+    THREE(18),
+    FOUR(27),
+    FIVE(36),
+    SIX(45)
 }
 
-enum class Column(val columns: Int, val startSlot: Int) {
+enum class Column(
+    val columns: Int,
+    val startSlot: Int
+) {
     ONE(1, 0),
     TWO(2, 1),
     THREE(3, 2),
@@ -22,11 +25,6 @@ enum class Column(val columns: Int, val startSlot: Int) {
     SEVEN(7, 6),
     EIGHT(8, 7),
     NINE(9, 8);
-
-    fun getEndSlot(guiType: GUIType): Int {
-        val rowAmount = guiType.size/9
-        return startSlot + (rowAmount * 9)
-    }
 }
 
 enum class Slot(val slot: Int) {

@@ -4,7 +4,9 @@ import eu.wolkenlosmc.api.gui.elements.Column
 import eu.wolkenlosmc.api.gui.elements.GUIItem
 import eu.wolkenlosmc.api.gui.elements.Row
 import eu.wolkenlosmc.api.gui.elements.Slot
+import eu.wolkenlosmc.api.utils.ItemBuilder
 import net.kyori.adventure.text.Component
+import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
@@ -92,7 +94,7 @@ class GUIBuilder(
  * @author TheSkyScout
  */
 class GUIPageBuilder(
-    private val index: Int,
+    val index: Int,
     private val guiBuilder: GUIBuilder,
 ) {
 
@@ -108,11 +110,11 @@ class GUIPageBuilder(
      * @author TheSkyScout
      */
     @Throws(IndexOutOfBoundsException::class)
-    fun item(slot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit){
+    fun item(slot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}){
         items[slot] = GUIItemBuilder(slot, itemStack).apply(builder).build()
     }
 
-    fun item(slot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit)
+    fun item(slot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
     = item(slot.slot, itemStack, builder)
 
     /**
@@ -148,7 +150,8 @@ class GUIPageBuilder(
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
     fun row(row: Row, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
-        for (i in row.startSlot..row.endSlot) {
+        for (i in row.startSlot..guiBuilder.type.rowLength) {
+            if (i > this.guiBuilder.type.size) break
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
@@ -166,7 +169,8 @@ class GUIPageBuilder(
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
     fun column(column: Column, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
-        for (i in column.startSlot..column.getEndSlot(this.guiBuilder.type) step 9) {
+        for (i in column.startSlot..guiBuilder.type.columnLength step 9) {
+            if (i > this.guiBuilder.type.size) break
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
@@ -220,6 +224,8 @@ class GUIPageBuilder(
         backgroundItemStack = itemStack
     }
 
+    fun background(material: Material) = background(ItemBuilder(material).setDisplayName(" ").toItemStack())
+
     /**
      * Builds the page
      * @return The page
@@ -239,8 +245,8 @@ class GUIPageBuilder(
  * @author TheSkyScout
  */
 class GUIItemBuilder(
-    val slot: Int,
-    val itemStack: ItemStack,
+    private val slot: Int,
+    private val itemStack: ItemStack,
 ) {
 
     var onClick: ((GUIClickEvent) -> Unit)? = null
