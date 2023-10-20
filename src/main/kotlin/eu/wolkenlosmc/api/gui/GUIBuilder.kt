@@ -150,7 +150,7 @@ class GUIPageBuilder(
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
     fun row(row: Row, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
-        for (i in row.startSlot..guiBuilder.type.rowLength) {
+        for (i in row.startSlot until guiBuilder.type.rowLength) {
             if (i > this.guiBuilder.type.size) break
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
@@ -169,7 +169,7 @@ class GUIPageBuilder(
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
     fun column(column: Column, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
-        for (i in column.startSlot..guiBuilder.type.columnLength step 9) {
+        for (i in column.startSlot until guiBuilder.type.columnLength step 9) {
             if (i > this.guiBuilder.type.size) break
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
