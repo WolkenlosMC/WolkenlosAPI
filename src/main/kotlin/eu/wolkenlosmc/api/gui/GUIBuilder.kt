@@ -1,6 +1,9 @@
 package eu.wolkenlosmc.api.gui
 
+import eu.wolkenlosmc.api.gui.elements.Column
 import eu.wolkenlosmc.api.gui.elements.GUIItem
+import eu.wolkenlosmc.api.gui.elements.Row
+import eu.wolkenlosmc.api.gui.elements.Slot
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -89,8 +92,8 @@ class GUIBuilder(
  * @author TheSkyScout
  */
 class GUIPageBuilder(
-    val index: Int,
-    val guiBuilder: GUIBuilder,
+    private val index: Int,
+    private val guiBuilder: GUIBuilder,
 ) {
 
     private val items = HashMap<Int, GUIItem>()
@@ -104,13 +107,13 @@ class GUIPageBuilder(
      * @since 1.0
      * @author TheSkyScout
      */
+    @Throws(IndexOutOfBoundsException::class)
     fun item(slot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit){
         items[slot] = GUIItemBuilder(slot, itemStack).apply(builder).build()
     }
 
     fun item(slot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit)
     = item(slot.slot, itemStack, builder)
-
 
     /**
      * Adds a line of items to the page
@@ -120,24 +123,22 @@ class GUIPageBuilder(
      * @param builder The builder for the items
      * @throws IndexOutOfBoundsException If the start slot or the end slot is out of bounds
      * @throws IllegalArgumentException If the start slot is greater than the end slot
-     * @since 1.1
+     * @since 1.1.3
      * @author TheSkyScout
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
-    fun row(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
+    fun fill(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
         for (i in startSlot..endSlot) {
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
 
-    fun row(startSlot: Slot, endSlot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
-    = row(startSlot.slot, endSlot.slot, itemStack, builder)
-
+    fun fill(startSlot: Slot, endSlot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
+    = fill(startSlot.slot, endSlot.slot, itemStack, builder)
 
     /**
-     * Adds a vertical line of items to the page
-     * @param startSlot The start slot of the line
-     * @param endSlot The end slot of the line
+     * Adds a line of items to the page
+     * @param row The row of the line
      * @param itemStack The item stack of the items
      * @param builder The builder for the items
      * @throws IndexOutOfBoundsException If the start slot or the end slot is out of bounds
@@ -146,20 +147,16 @@ class GUIPageBuilder(
      * @author TheSkyScout
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
-    fun column(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
-        for (i in startSlot..endSlot step 9) {
+    fun row(row: Row, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
+        for (i in row.startSlot..row.endSlot) {
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
 
-    fun column(startSlot: Slot, endSlot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
-    = column(startSlot.slot, endSlot.slot, itemStack, builder)
-
 
     /**
-     * Adds a square of items to the page
-     * @param startSlot The start slot of the line
-     * @param endSlot The end slot of the line
+     * Adds a vertical line of items to the page
+     * @param column The column of the line
      * @param itemStack The item stack of the items
      * @param builder The builder for the items
      * @throws IndexOutOfBoundsException If the start slot or the end slot is out of bounds
@@ -168,16 +165,11 @@ class GUIPageBuilder(
      * @author TheSkyScout
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
-    fun square(startSlot: Int, endSlot: Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
-        for (i in startSlot..endSlot step 9) {
-            for (j in i..i + 8) {
-                items[j] = GUIItemBuilder(j, itemStack).apply(builder).build()
-            }
+    fun column(column: Column, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
+        for (i in column.startSlot..column.getEndSlot(this.guiBuilder.type) step 9) {
+            items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
-
-    fun square(startSlot: Slot, endSlot: Slot, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {})
-    = square(startSlot.slot, endSlot.slot, itemStack, builder)
 
     /**
      * Adds a square of items to the page
@@ -191,6 +183,7 @@ class GUIPageBuilder(
      * @since 1.1.2
      * @author TheSkyScout
      */
+    @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
     fun square(startSlot: Int, width:Int, height:Int, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
         for (i in startSlot..startSlot + (width - 1) + (height - 1) * 9 step 9) {
             for (j in i..i + (width - 1)) {
@@ -208,6 +201,7 @@ class GUIPageBuilder(
      * @since 1.1.2
      * @author TheSkyScout
      */
+     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
     fun copyFromPage(page: GUIPage) {
         items.putAll(page.items)
         backgroundItemStack = page.backgroundItem
