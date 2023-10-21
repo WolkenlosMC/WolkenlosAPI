@@ -169,8 +169,7 @@ class GUIPageBuilder(
      */
     @Throws(IndexOutOfBoundsException::class, IllegalArgumentException::class)
     fun column(column: Column, itemStack: ItemStack, builder: GUIItemBuilder.() -> Unit = {}) {
-        for (i in column.startSlot until guiBuilder.type.columnLength step 9) {
-            if (i > this.guiBuilder.type.size) break
+        for (i in column.startSlot until guiBuilder.type.size step guiBuilder.type.rowLength) {
             items[i] = GUIItemBuilder(i, itemStack).apply(builder).build()
         }
     }
