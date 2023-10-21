@@ -1,0 +1,65 @@
+site_name: WolkenlosAPI
+repo_name: WolkenlosAPI
+repo_url: https://github.com/WolkenlosMC/WolkenlosAPI
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+theme:
+  name: material
+  logo: assets/img/logo.png
+  features:
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+plugins:
+  - search
+nav:
+  - Introduction: index.md
+  - Getting Started:
+    - Implementation: pages/getting-started/implementation.md
+    - Intigration: pages/getting-started/intigration.md
+  - Listener: pages/listener/listener.md
+  - GUI:
+    - Create GUI: pages/gui/create.md
+    - GUI Page: pages/gui/page.md
+    - GUI Item: pages/gui/item.md
+    - GUIClickEvent: pages/gui/click-event.md
+    - GUICloseEvent: pages/gui/close-event.md
+  - Utils:
+      - ItemBuilder: pages/utils/item-builder.md
+      - HeadBuilder: pages/utils/head-builder.md
+  - Extensions:
+      - Adventure: pages/extensions/adventure.md
