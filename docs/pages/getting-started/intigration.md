@@ -7,7 +7,7 @@ This is a small guide how to integrate the API in your minecraft plugin.
         We recommend you to use [Kotlin](https://kotlinlang.org) as your programming language, because the API is written in Kotlin.
         But you can also use [Java](https://java.com) if you want.
 
-    To use this API you have to implement it, you cann see how to do this in the [Implementation](pages/getting-started/implementation/) section.
+    To use this API you have to implement it, you cann see how to do this in the [Implementation](../../../pages/getting-started/implementation/) section.
     Then you have to register the API in your `onEnable` method:
     ```kotlin title="Main.kt"
     companion object {
