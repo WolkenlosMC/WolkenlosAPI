@@ -35,3 +35,4 @@ This is a small guide how to integrate the API in your minecraft plugin.
     ```
     !!! warning "Warning"
         The `WolkenlosAPI` was never tested in Java, so it may not work.
+        

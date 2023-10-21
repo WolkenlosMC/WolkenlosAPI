@@ -3,6 +3,9 @@ This is the documentation for the WolkenlosAPI. WolkenlosAPI is a Kotlin
 library for Minecraft (Spigot). It adds a lot of features for building own 
 plugins for Wolkenlos.
 
+## Version
+Latest version: `1.1.3`
+
 ## Features
 | Feature                                           | Description                                    | Added in         |
 |---------------------------------------------------|------------------------------------------------|------------------|
