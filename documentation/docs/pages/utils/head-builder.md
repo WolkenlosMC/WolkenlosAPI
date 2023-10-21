@@ -42,4 +42,4 @@ To get the builder, you can use the `getBuilder` method. This will return an
     ```
 
 !!! note
-    The method to get the head of a player-name will be added soon.
+    The method to get the head of a player-name will be added soon. :)
