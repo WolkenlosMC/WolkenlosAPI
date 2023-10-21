@@ -1,6 +1,6 @@
 # HeadBuilder
 HeadBuilder is a class that allows you to create heads. It returns an 
-[ItemBuilder](item-builder.md) with the head as the item. It is a wrapper
+[ItemBuilder](pages/utils/item-builder) with the head as the item. It is a wrapper
 for the Bukkit class `ItemStack`.
 
 ## Create
@@ -27,7 +27,7 @@ To create a HeadBuilder, you need to use the constructor.
 
 ## Get Builder
 To get the builder, you can use the `getBuilder` method. This will return an
-[ItemBuilder](item-builder.md) with the head as the item.
+[ItemBuilder](pages/utils/item-builder) with the head as the item.
 
 === "Kotlin"
 
