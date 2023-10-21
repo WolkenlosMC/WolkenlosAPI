@@ -48,7 +48,7 @@ in every slot of the page.
 
 ## Forms
 You can create a form of items in a GUI page. A form is a grid of items. Also, you can
-add a [onClick](../../pages/gui/item/#onClick) event to the form. This event is called when a player clicks on any item
+add a [onClick](../../../pages/gui/item/#onClick) event to the form. This event is called when a player clicks on any item
 in the form.
 
 ### Row

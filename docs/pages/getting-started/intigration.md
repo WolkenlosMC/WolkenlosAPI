@@ -21,7 +21,7 @@ This is a small guide how to integrate the API in your minecraft plugin.
 
 === "Java"
 
-    To use this API you have to implement it, you cann see how to do this in the [Implementation](../../pages/getting-started/implementation/) section.
+    To use this API you have to implement it, you cann see how to do this in the [Implementation](../../../pages/getting-started/implementation/) section.
     Then you have to register the API in your `onEnable` method:
     ```java title="Main.java"
     public class Main extends JavaPlugin {
