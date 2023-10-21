@@ -1,4 +1,6 @@
 site_name: WolkenlosAPI
+site_description: WolkenlosAPI is a simple API for creating GUIs and more.
+site_author: TheSkyScout
 repo_name: WolkenlosAPI
 repo_url: https://github.com/WolkenlosMC/WolkenlosAPI
 markdown_extensions:
