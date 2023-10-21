@@ -1,5 +1,5 @@
 # WolkenlosAPI
-**Latest Version:** `1.1.2`
+**Latest Version:** `1.1.3`
 
 WolkenlosAPI is a Kotlin libary for Minecaft(Spigot). It adds a lot of features for 
 building own plugins for Wolkenlos. 
@@ -23,14 +23,17 @@ And from now on you can use every function of the api, withoud any problems.
 ### GUI's
 This allows you to easily create clickable GUI's in Minecraft.
 ```kt
-player.gui(GUIType.TWENTY_SEVEN, format("Title")) {
+player.gui(GUIType.TWENTY_SEVEN, component("Title")) {
    page(0) {
-      background(ItemStack(Material.REDSTONE))
+      background(Material.BLACK_STAINED_GLASS_PANE)
       item(0, ItemStack(Material.STICK)) {
          onClick = { event, gui, player ->
             event.player.sendMessage("You clicked a Stick")
          }
-      }.condition({!it.hasPermission("test.admin")}, ItemStack(Material.BARRIER))
+         condition({!it.hasPermission("test.admin")}, ItemStack(Material.BARRIER))
+      }
+      row(Row.ONE, ItemStack(Material.DIAMOND))
+      column(Column.TWO, ItemStack(Material.EMERALD))
    }
 }
 ```
