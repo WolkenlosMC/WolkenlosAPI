@@ -72,7 +72,7 @@ Or you can use the `Player.gui()` method:
 ## onClose
 The `onClose` method is called when the GUI is closed. This method is called
 when the GUI is closed by the player or when the GUI is closed by the server.
-It returns a [GUICloseEvent](pages/gui/close-event).
+It returns a [GUICloseEvent](../../pages/gui/close-event).
 
 === "Kotlin" 
 
