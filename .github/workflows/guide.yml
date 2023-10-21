@@ -2,7 +2,7 @@ name: ci-guide
 on:
   push:
     paths:
-      - guide/**
+      - docs/**
     branches:
       - master 
       - main
