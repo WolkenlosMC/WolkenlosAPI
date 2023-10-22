@@ -1,8 +1,11 @@
 site_name: WolkenlosAPI
-site_description: WolkenlosAPI is a simple API for creating GUIs and more.
-site_author: TheSkyScout
+site_description: Extended Spigot and Bukkit API for Kotlin
+site_author: Antonio Wilczynski
+copyright: Copyright © (2023) - Antonio Wilczynski
+
 repo_name: WolkenlosAPI
 repo_url: https://github.com/WolkenlosMC/WolkenlosAPI
+
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true

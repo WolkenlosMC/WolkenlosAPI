@@ -14,7 +14,14 @@ Latest version: `1.1.3`
 | [GUI](pages/gui/create/)                          | A API to create GUIs with ease                 | 1.0.0            |
 | [Listener](pages/listener/listener/)              | A class to simply create Listeners             | 1.0.0            |
 | [AdventureExtension](pages/extensions/adventure/) | A extension that add some helpfully functions  | 1.1.0            |
-| Holograms                                         | A API to create and manage holograms           | :material-close: |
+
+## Coming soon
+| Feature          | Description                           | Coming in |
+|------------------|---------------------------------------|-----------|
+| HologramAPI      | An API to create and manage holograms | 1.1.4     |
+| WTab integration | Allows you to access the prefix       | 1.1.4     |
+| NPC-API          | An API to create NPCs                 | 1.1.5     |
+| GUI-Animations   | A feature to animate GUIs             | 1.1.6     |
 
 ## Made for Wolkenlos
 This API is made for the Wolkenlos Minecraft server. It is not tested on other 
@@ -26,5 +33,7 @@ If you want to contribute to this project, you can do it. Fork this
 repository and create a pull request. We will check it and maybe merge it.
 
 ## Authors
-- [TheSkyScout](https://github.com/TheScoutSky)
+- [Antonio Wilczynski](https://github.com/TheScoutSky) - **Lead Developer**
+- [Tobi](https://github.com/iswearimmrtobi) - **Developer**
+- [Hofy](https://github.com/Hofyyy) - **Web-Developer**
 
