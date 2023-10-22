@@ -30,7 +30,7 @@ guarantee that it will work.
 
 ## Contributing
 If you want to contribute to this project, you can do it. Fork this
-repository and create a pull request. We will check it and maybe merge it..
+repository and create a pull request. We will check it and maybe merge it.
 
 ## Authors
 - [Antonio Wilczynski](https://github.com/TheScoutSky) - **Lead Developer**
